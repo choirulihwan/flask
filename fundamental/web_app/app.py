@@ -1,10 +1,13 @@
+import sys, os
 
 from flask import Flask, render_template
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
-from web_app.models import db, Page, Menu
-from web_app.views import PageAdminView
+sys.path.append(os.getcwd() + '/web_app')
+
+from models import db, Page, Menu
+from views import PageAdminView
 
 def create_app():
     app = Flask(__name__)
