@@ -6,7 +6,6 @@ from flask_admin.contrib.sqla import ModelView
 from web_app.models import db, Page, Menu
 from web_app.views import PageAdminView
 
-
 def create_app():
     app = Flask(__name__)
     # app.config['DEBUG'] = True
@@ -24,13 +23,17 @@ def create_app():
     @app.route('/')
     @app.route('/<slug>')
     def index(slug=None):
-        page = Page.query.filter_by(slug='homepage').first()
+
         if slug is not None:
             page = Page.query.filter_by(slug=slug).first()
+        else:
+            page = Page.query.filter_by(is_homepage=True).first()
 
         content = ''
         if page is not None:
             content = page.content
+        else:
+            return 'Page not found for {} or homepage not set'.format(slug)
 
         menu = Menu.query.order_by('order').all()
         return render_template('index.html', TITLE='Flask bootstrap', CONTENT=content, MENU=menu)
