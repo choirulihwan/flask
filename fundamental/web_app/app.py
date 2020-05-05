@@ -3,11 +3,14 @@ import sys, os
 from flask import Flask, render_template
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask_login import login_required
+from flask_security import SQLAlchemyUserDatastore, Security
 
 sys.path.append(os.getcwd() + '/web_app')
 
-from models import db, Page, Menu
-from views import PageAdminView
+from models import db, Page, Menu, User, Role
+from views import PageAdminView, MenuAdminView, SecureAdminIndexView
+
 
 def create_app():
     app = Flask(__name__)
@@ -18,10 +21,13 @@ def create_app():
     db.init_app(app)
 
     #flask admin
-    admin = Admin(app, name="Flask Bootsrap", template_mode='bootstrap3')
+    admin = Admin(app, name="Flask Bootsrap", template_mode='bootstrap3', index_view=SecureAdminIndexView())
 
     admin.add_view(PageAdminView(Page, db.session))
-    admin.add_view(ModelView(Menu, db.session))
+    admin.add_view(MenuAdminView(Menu, db.session))
+
+    user_data = SQLAlchemyUserDatastore(db, User, Role)
+    security = Security(app, user_data)
 
     @app.route('/')
     @app.route('/<slug>')
@@ -40,6 +46,11 @@ def create_app():
 
         menu = Menu.query.order_by('order').all()
         return render_template('index.html', TITLE='Flask bootstrap', CONTENT=content, MENU=menu)
+
+    @app.route('/rahasia')
+    @login_required
+    def rahasia():
+        return "<h1>Halaman rahasia</h1"
 
     # @app.route('/about')
     # def about():
