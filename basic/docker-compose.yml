@@ -1,0 +1,19 @@
+version: '2'
+services:
+    web:
+        build: .
+        command: >
+          gunicorn -b 0.0.0.0:8000
+          --access-logfile -
+          --reload
+          "web_app.app_redis:create_app()"
+        environment:
+          PYTHONUNBUFFERED: 'true'
+        ports:
+            - "80:8000"
+        volumes:
+            - '.:/web_app'
+        depends_on:
+            - redis
+    redis:
+        image: redis
