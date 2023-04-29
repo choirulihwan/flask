@@ -26,16 +26,19 @@ class Ocr(Resource):
     def post(self):
         some_json = request.get_json()
 
+
         # download file to local
         urllib.request.urlretrieve(some_json['location'], "ijazah.jpg")
+
 
         image_path = 'ijazah.jpg'
         reader = easyocr.Reader(['en'], gpu=False)
         result = reader.readtext(image_path)
 
         img = cv2.imread(image_path)
+        all_text = ''
         tag_nama = ''
-        obj_result = {"jns":'', "nama":''}
+        obj_result = {"jns":'', "nama":'', "result":"false"}
 
         for idx, detection in enumerate(result):
             if (detection[1].replace(" ", "").upper() == 'IJAZAH') or (tag_nama.lower() == 'nama'):
@@ -46,6 +49,13 @@ class Ocr(Resource):
 
             # clear tag nama
             tag_nama = detection[1]
+            all_text += detection[1]
+
+        # obj_result["result"] = all_text
+        # if all_text != None and some_json['nama'] in all_text:
+        #     obj_result["result"] = 'true'
+        obj_result["result"] = all_text
+
         return {"result": obj_result}
 
 

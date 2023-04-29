@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %} Barcode Generator {% endblock %}
+
+{% block header %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+      <section class="container">
+
+           <div class="card mt-2">
+              <div class="card-header">
+                Barcode Generator
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Type the data you want to generate</h5>
+                <br>
+                <form method="post" action="/barcode">
+                  <div class="mb-3">
+                    <label for="barcode" class="form-label">Barcode Data</label>
+                    <input type="text" value="{{ data }}" name="barcode" class="form-control" id="barcode" placeholder="Type data">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Generate</button>
+                </form>
+                  <br>
+              {% if data %}
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        {% for message in messages %}
+                          <div class="alert alert-success" role="alert">{{ message }}</div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                    <img src = "static/barcode.svg" alt="My Happy SVG" class="img-fluid rounded mx-auto d-block" />
+              {% endif %}
+              </div>
+          </div>
+
+      </section>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+

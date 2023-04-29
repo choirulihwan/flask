@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Lossless PDF Compression {% endblock %}
+
+{% block header %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+      <section class="container">
+
+           <div class="card mt-2">
+              <div class="card-header">
+                PDF Compression
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Load PDF File you want to compress</h5>
+                <br>
+                <form method="post" action="/compresspdf" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">File PDF</label>
+                      <input class="form-control" type="file" id="formFile" name="filepdf">
+                    </div>
+                  <button type="submit" class="btn btn-primary">Compress</button>
+                </form>
+                  <br>
+              {% if data %}
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        {% for message in messages %}
+                          <div class="alert alert-success" role="alert">{{ message }}</div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+              {% endif %}
+              </div>
+          </div>
+
+      </section>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}
+
