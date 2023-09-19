@@ -10,12 +10,13 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
+        <h1 class="fw-light">Your Tools</h1>
+        <p class="lead text-muted">Here are some tools usable for you to help you do daily activity.
+          These tools categorized by certain category. The functionality will be added as needed.</p>
+<!--        <p>-->
+<!--          <a href="#" class="btn btn-primary my-2">Main call to action</a>-->
+<!--          <a href="#" class="btn btn-secondary my-2">Secondary action</a>-->
+<!--        </p>-->
       </div>
     </div>
   </section>
@@ -31,15 +32,14 @@
             </svg>
 
             <div class="card-body">
-              <p class="card-text">Barcode Generator</p>
+              <p class="card-text">Barcode & QRCode</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href = '/barcode'">View</button>
-<!--                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
-                </div>
-                <small class="text-muted">9 mins</small>
               </div>
             </div>
+           <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="/barcode">Barcode Generator</a></li>
+             <li class="list-group-item"><a href="/qrcode">QRCode Generator</a></li>
+            </ul>
           </div>
         </div>
         <div class="col">
@@ -51,12 +51,13 @@
             <div class="card-body">
               <p class="card-text">PDF Tools</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href = '/compresspdf'">View</button>
-                </div>
-                <small class="text-muted">9 mins</small>
               </div>
             </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="/compresspdf">Compress PDF</a></li>
+              <li class="list-group-item"><a href="/toexcel">PDF to Excel</a></li>
+            </ul>
+
           </div>
         </div>
         <div class="col">
@@ -68,12 +69,10 @@
             <div class="card-body">
               <p class="card-text">Image Processing</p>
               <div class="d-flex justify-content-between align-items-center">
-
               </div>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><a href="/removebg">Remove Background</a></li>
-
             </ul>
           </div>
         </div>
