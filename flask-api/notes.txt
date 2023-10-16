@@ -1,6 +1,0 @@
-[set execution policy]
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
-
-[useful commands]
-- upgrade pip from terminal
-    + python -m pip install --upgrade pip
